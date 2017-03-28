@@ -12,6 +12,7 @@ POST    /register                               App.Register
 GET     /logout                                 App.Logout
 
 GET     /dashboard                              Dashboard.Index
+POST    /create_project                         Dashboard.CreateProject
 
 # Ignore favicon requests
 GET     /favicon.ico                            404

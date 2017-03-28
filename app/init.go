@@ -64,10 +64,20 @@ func MigrateDB() {
 
 	if DB.HasTable(&models.User{}) != true {
 		DB.CreateTable(&models.User{})
-		// Add necessary indexes as well
 		DB.Model(&models.User{}).AddIndex("idx_user_name", "name")
 		DB.Model(&models.User{}).AddUniqueIndex("idx_user_email", "email")
 		DB.Model(&models.User{}).AddIndex("idx_user_delete_at", "deleted_at")
 		DB.Model(&models.User{}).AddIndex("idx_user_created_at", "created_at")
+	}
+
+	if DB.HasTable(&models.Project{}) != true {
+		DB.CreateTable(&models.Project{})
+		DB.Model(&models.Project{}).AddIndex("idx_project_name", "name")
+	}
+
+	if DB.HasTable(&models.UserProject{}) != true {
+		DB.CreateTable(&models.UserProject{})
+		DB.Model(&models.UserProject{}).AddIndex("idx_user_join_id", "user_id")
+		DB.Model(&models.UserProject{}).AddIndex("idx_project_join_id", "project_id")
 	}
 }

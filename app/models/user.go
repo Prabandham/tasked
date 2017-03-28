@@ -15,6 +15,8 @@ type User struct {
 	Password             string
 	PasswordConfirmation string `gorm:"-"`
 	TermsOfUse           bool
+
+	Projects []Project `gorm:many2many:user_projects;`
 }
 
 // Validate validates the object while registering

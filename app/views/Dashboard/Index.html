@@ -5,9 +5,38 @@
 <div class="container">
     {{template "flash.html" .}}
 
-    <h5 class="text-center">
-        This is awesome !!!
-    </h5>
+    <div class="row">
+        <form role="form" class="form-horizontal" method="POST" action="/create_project">
+            <div class="col-xs-1"></div>
+            <div class="col-xs-8 no-padding-right">
+                <input type="text" class="form-control" id="name" name="project.Name" placeholder="Project Name">
+            </div>
+            <div class="col-xs-3 no-padding-left">
+                <button type="submit" class="btn btn-primary">Create</button>
+            </div>
+        </form>
+    </div>
+
+    <br />
+    <br />
+    <div class="text-center">
+        {{ if eq .projectsCount 0 }}
+        <h5 class="text-center text-success"> No Projects Created Yet !! </h5>
+        {{ else }}
+        <div class="row">
+            <div class="">
+                {{ range $project := .projects }}
+                    <div class="col-xs-4">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading"> {{ index $project.Name }}</div>
+                            <div class="panel-body"><small> Project Description</small></div>
+                        </div>
+                    </div>
+                {{ end }}
+            </div>
+            {{ end }}
+        </div>
+    </div>
 </div>
 
 {{template "footer.html" .}}
