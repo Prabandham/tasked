@@ -9,6 +9,9 @@ GET     /login                                  App.Login
 POST    /login                                  App.Login
 GET     /register                               App.Register
 POST    /register                               App.Register
+GET     /logout                                 App.Logout
+
+GET     /dashboard                              Dashboard.Index
 
 # Ignore favicon requests
 GET     /favicon.ico                            404
