@@ -1,0 +1,63 @@
+User -> Project -> User
+
+
+A user Has and belongs to many Projects (This is just a namespace)
+
+Which he can share with other Users (Using their email-id)
+
+If a project (namespace) has only the user. Then it will have just a list of tasks.
+
+
+Project has many phases. (default_phase) for a single User and a Project.
+
+If There are more than one user in the Project then it automatically will shift to a trello kind of UI
+with websockets enabled.
+
+Project -> (HasMany) -> Phases -> (HasMany) -> Tasks
+
+Task
+  UserID the user to which this task is assigned to (defaults to the one adding the task).
+  PhaseId the phase to which this task belongs to.
+  Description A short description what the task is.
+  CreatedAt
+  DeletedAt
+  CompletedAt //This is used only when things are in default_state
+
+
+
+Phase
+  name (default_phase) if only one User in the Project.
+
+# Scenario:
+
+## Project with Only One User.
+
+By default this project will have one Phase called (default_phase)
+
+And to this the User can add as many Tasks as he wants.
+
+
+-------------------------
+Create Task              |
+-------------------------
+
+1. Task One   ()
+2. Task Two   ()
+3. Task Three ()
+
+
+In Case of multiple Users per Project then it will look like trello
+
+
+-------------------------------
+| Develop | Phase 2 | Phase 3 |
+-------------------------------
+|         |         |         |
+|         |         |         |
+-------------------------------
+|         |         |         |
+|         |         |         |
+-------------------------------
+|         |         |         |
+|         |         |         |
+-------------------------------
