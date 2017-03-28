@@ -1,20 +1,14 @@
-# Welcome to Revel
+# Welcome to Tasked
 
-## Getting Started
+## What is Tasked?
 
-A high-productivity web framework for the [Go language](http://www.golang.org/).
+A simple Task managment Application
 
-### Start the web server:
+## Development Dependancies
 
-    revel run myapp
-
-   Run with <tt>--help</tt> for options.
-
-### Go to http://localhost:9000/ and you'll see:
-
-"It works"
-
-### Description of Contents
+    1. golang
+    2. Revel
+    3. mysql
 
 The default directory structure of a generated Revel application:
 
@@ -61,15 +55,10 @@ test
 
     Tests are kept in the tests directory. Revel provides a testing framework that makes it easy to write and run functional tests against your application.
 
-### Follow the guidelines to start developing your application:
-
-* The README file created within your application.
-* The [Getting Started with Revel](http://revel.github.io/tutorial/index.html).
-* The [Revel guides](http://revel.github.io/manual/index.html).
-* The [Revel sample apps](http://revel.github.io/samples/index.html).
-* The [API documentation](https://godoc.org/github.com/revel/revel).
-
 ## Contributing
-We encourage you to contribute to Revel! Please check out the [Contributing to Revel
-guide](https://github.com/revel/revel/blob/master/CONTRIBUTING.md) for guidelines about how
-to proceed. [Join us](https://groups.google.com/forum/#!forum/revel-framework)!
+We encourage you to contribute to Tasked! 
+
+1. Fork the repo
+2. git checkout -b my-awesome-feature
+3. git push origin my-awesome-feature
+4. Create Pull request.

@@ -8,7 +8,11 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/">Tasked</a>
+            {{ if index .session "user_name" }}
+                <a class="navbar-brand" href="/dashboard">Tasked</a>
+            {{ else }}
+                <a class="navbar-brand" href="/">Tasked</a>
+            {{ end }}
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
