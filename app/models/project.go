@@ -9,8 +9,9 @@ import (
 type Project struct {
 	gorm.Model
 
-	Name  string
-	Users []User `gorm:many2many:user_projects;`
+	Name   string
+	Users  []User `gorm:many2many:user_projects;`
+	Phases []Phase
 }
 
 // Validate validates that a project should not be empty

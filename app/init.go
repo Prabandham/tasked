@@ -80,4 +80,19 @@ func MigrateDB() {
 		DB.Model(&models.UserProject{}).AddIndex("idx_user_join_id", "user_id")
 		DB.Model(&models.UserProject{}).AddIndex("idx_project_join_id", "project_id")
 	}
+
+	if DB.HasTable(&models.Phase{}) != true {
+		DB.CreateTable(&models.Phase{})
+		DB.Model(&models.Phase{}).AddIndex("idx_phase_name", "name")
+		DB.Model(&models.Phase{}).AddIndex("idx_phase_description", "description")
+		DB.Model(&models.Phase{}).AddIndex("idx_phase_project_id", "project_id")
+	}
+
+	if DB.HasTable(&models.Task{}) != true {
+		DB.CreateTable(&models.Task{}).AddIndex("idx_task_name", "name")
+		DB.CreateTable(&models.Task{}).AddIndex("idx_task_description", "description")
+		DB.CreateTable(&models.Task{}).AddIndex("idx_task_phase", "phase_id")
+		DB.CreateTable(&models.Task{}).AddIndex("idx_task_user", "user_id")
+		DB.CreateTable(&models.Task{}).AddIndex("idx_task_due_on", "due_on")
+	}
 }

@@ -27,10 +27,12 @@
             <div class="">
                 {{ range $project := .projects }}
                     <div class="col-xs-4">
-                        <div class="panel panel-primary">
-                            <div class="panel-heading"> {{ index $project.Name }}</div>
-                            <div class="panel-body"><small> Project Description</small></div>
-                        </div>
+                        <a href="/project/{{ index $project.ID }}">
+                            <div class="panel panel-primary">
+                                <div class="panel-heading"> {{ index $project.Name }}</div>
+                                <div class="panel-body"><small> Project Description</small></div>
+                            </div>
+                        </a>
                     </div>
                 {{ end }}
             </div>

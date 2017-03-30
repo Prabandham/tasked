@@ -1,0 +1,32 @@
+<form role="form" class="form-horizontal" method="POST" action="/create_task">
+    <div class="col-xs-1"></div>
+    <div class="col-xs-8 no-padding-right">
+        <input type="text" class="form-control" id="name" name="task.Name" placeholder="Task">
+        {{ range $phase := .phases }}
+            <input type="hidden" class="form-control" id="phase_id" name="task.PhaseID" value="{{index $phase.ID }}">
+        {{ end  }}
+    </div>
+    <div class="col-xs-3 no-padding-left">
+        <button type="submit" class="btn btn-primary">Create</button>
+    </div>
+</form>
+
+<br />
+<br />
+<br />
+<br />
+<div class="row">
+    <div class="container">
+        <ul class="list-group">
+            {{ range $task := .tasks }}
+                <li class="list-group-item  {{ index $task.CompletionStatus }}">
+                    {{ if eq $task.IsComplete false }}
+                        <input type="checkbox" name="task_{{ index $task.ID }}" id="task_{{ index $task.ID }}" value="0" class="pull-right task-check">
+                    {{ end }}
+                    <b>{{ index $task.Name }}
+                </li>
+                <br />
+            {{end}}
+        </ul>
+    </div>
+</div>

@@ -17,6 +17,7 @@ type User struct {
 	TermsOfUse           bool
 
 	Projects []Project `gorm:many2many:user_projects;`
+	Tasks    []Task
 }
 
 // Validate validates the object while registering

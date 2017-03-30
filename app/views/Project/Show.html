@@ -1,0 +1,18 @@
+{{set . "title" "Dashboard"}}
+{{template "header.html" .}}
+
+
+<div class="container">
+    {{template "flash.html" .}}
+
+    <h5><b>{{ .project.Name }}</b></h5>
+
+    <hr />
+    <br />
+
+    {{ if eq .projectUsersCount 1 }}
+        {{ template "Project/List.html" . }}
+    {{ else }}
+        {{ template "Project/Pipeline.html" . }}
+    {{ end }}
+</div>

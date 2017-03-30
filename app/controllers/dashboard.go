@@ -6,7 +6,6 @@ import (
 	"fmt"
 	"github.com/Prabandham/tasked/app"
 	"github.com/Prabandham/tasked/app/models"
-	"strconv"
 )
 
 // Dashboard controller
@@ -25,20 +24,4 @@ func (c Dashboard) Index() revel.Result {
 	projectsCount := len(projects)
 
 	return c.Render(projects, projectsCount)
-}
-
-func (c Dashboard) CreateProject() revel.Result {
-	project := models.Project{Name: c.Request.Form.Get("project.Name")}
-	app.DB.Create(&project)
-
-	intUserId, _ := strconv.Atoi(c.Session["user_id"])
-
-	userProject := models.UserProject{UserId: uint(intUserId), ProjectId: project.ID}
-	app.DB.Create(&userProject)
-
-	c.Flash.Success("Created Successfully !!")
-	c.Validation.Keep()
-	c.FlashParams()
-
-	return c.Redirect("/dashboard")
 }

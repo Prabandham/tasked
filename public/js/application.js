@@ -7,4 +7,18 @@ $(document).on("turbolinks:load", function() {
     } else {
         $("#login-link").addClass("hidden")
     }
+
+    // Task completion for List View
+    $(".task-check").on("click", function() {
+        var task = $(this);
+        $.post("/complete_task", { value: task.attr("id").split("task_")[1] })
+            .done(function(data) {
+                task.parent().removeClass("list-group-item-warning");
+                task.parent().addClass(data.cssClass);
+                task.remove();
+            });
+    });
+
+    //Remove alert after 3 seconds.
+    $(".alert").delay(3000).fadeOut("slow");
 });
