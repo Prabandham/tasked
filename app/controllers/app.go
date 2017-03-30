@@ -1,11 +1,12 @@
 package controllers
 
 import (
+	"strconv"
+
 	"github.com/Prabandham/tasked/app"
 	"github.com/Prabandham/tasked/app/models"
 	"github.com/revel/revel"
 	"golang.org/x/crypto/bcrypt"
-	"strconv"
 )
 
 // App Controller
@@ -63,13 +64,13 @@ func (c App) Register(user *models.User) revel.Result {
 				c.Validation.Keep()
 				c.FlashParams()
 				return c.Redirect(App.Login)
-			} else {
-				c.Flash.Success("Registerd successfully !! Welcome %s", user.Name)
-				c.Validation.Keep()
-				c.FlashParams()
-				// TODO sign the user in and redirect to dashboard
-				return c.Redirect(App.Login)
 			}
+
+			c.Flash.Success("Registerd successfully !! Welcome %s", user.Name)
+			c.Validation.Keep()
+			c.FlashParams()
+			// TODO sign the user in and redirect to dashboard
+			return c.Redirect(App.Login)
 		}
 	}
 	return c.Render()

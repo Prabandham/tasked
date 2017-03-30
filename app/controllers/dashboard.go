@@ -4,6 +4,8 @@ import (
 	"github.com/revel/revel"
 
 	"fmt"
+	"strconv"
+
 	"github.com/Prabandham/tasked/app"
 	"github.com/Prabandham/tasked/app/models"
 )
@@ -13,6 +15,7 @@ type Dashboard struct {
 	Application
 }
 
+// Index is going to handle showing of all projects the user has
 func (c Dashboard) Index() revel.Result {
 	//var user models.User
 	//app.DB.First(&user, c.Session["user_id"])

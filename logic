@@ -1,7 +1,7 @@
 User -> Project -> User
 
 
-A user Has and belongs to many Projects (This is just a namespace)
+A user Has and belongs to many Projects (Project is just a namespace)
 
 Which he can share with other Users (Using their email-id)
 
@@ -19,6 +19,7 @@ Task
   UserID the user to which this task is assigned to (defaults to the one adding the task).
   PhaseId the phase to which this task belongs to.
   Description A short description what the task is.
+  DueDate DateTime before which this task has to be completed
   CreatedAt
   DeletedAt
   CompletedAt //This is used only when things are in default_state
