@@ -73,6 +73,9 @@ func MigrateDB() {
 	if DB.HasTable(&models.Project{}) != true {
 		DB.CreateTable(&models.Project{})
 		DB.Model(&models.Project{}).AddIndex("idx_project_name", "name")
+		DB.Model(&models.Project{}).AddIndex("idx_project_delete_at", "deleted_at")
+		DB.Model(&models.Project{}).AddIndex("idx_project_created_at", "created_at")
+		DB.Model(&models.Project{}).AddIndex("idx_project_updated_at", "updated_at")
 	}
 
 	if DB.HasTable(&models.UserProject{}) != true {
@@ -84,15 +87,19 @@ func MigrateDB() {
 	if DB.HasTable(&models.Phase{}) != true {
 		DB.CreateTable(&models.Phase{})
 		DB.Model(&models.Phase{}).AddIndex("idx_phase_name", "name")
-		DB.Model(&models.Phase{}).AddIndex("idx_phase_description", "description")
 		DB.Model(&models.Phase{}).AddIndex("idx_phase_project_id", "project_id")
+		DB.Model(&models.Phase{}).AddIndex("idx_phase_deleted_at", "deleted_at")
+		DB.Model(&models.Phase{}).AddIndex("idx_phase_created_at", "created_at")
+		DB.Model(&models.Phase{}).AddIndex("idx_phase_updated_at", "updated_at")
 	}
 
 	if DB.HasTable(&models.Task{}) != true {
 		DB.CreateTable(&models.Task{}).AddIndex("idx_task_name", "name")
-		DB.CreateTable(&models.Task{}).AddIndex("idx_task_description", "description")
-		DB.CreateTable(&models.Task{}).AddIndex("idx_task_phase", "phase_id")
-		DB.CreateTable(&models.Task{}).AddIndex("idx_task_user", "user_id")
-		DB.CreateTable(&models.Task{}).AddIndex("idx_task_due_on", "due_on")
+		DB.Model(&models.Task{}).AddIndex("idx_task_phase", "phase_id")
+		DB.Model(&models.Task{}).AddIndex("idx_task_user", "user_id")
+		DB.Model(&models.Task{}).AddIndex("idx_task_due_on", "due_on")
+		DB.Model(&models.Task{}).AddIndex("idx_task_deleted_at", "deleted_at")
+		DB.Model(&models.Task{}).AddIndex("idx_task_created_at", "created_at")
+		DB.Model(&models.Task{}).AddIndex("idx_task_updated_at", "updated_at")
 	}
 }
