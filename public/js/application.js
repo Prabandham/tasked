@@ -85,4 +85,11 @@ $(document).on("turbolinks:load", function() {
             }
         }
     });
+
+    // Remove container if page has id of no-container
+    if($(".pipeline-view").length == 1) {
+        $(document).find(".container").addClass("container-fluid").removeClass("container");
+    } else {
+        $(document).find(".container").removeClass("container-fluid");
+    }
 });

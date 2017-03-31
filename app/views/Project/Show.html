@@ -2,28 +2,26 @@
 {{template "header.html" .}}
 
 
-<div class="container">
     {{template "flash.html" .}}
 
-    <div class="row">
-        <div class="col-xs-10">
-            <h4><b>{{ .project.Name }}</b></h4>
-        </div>
-        <div class="col-xs-">
-            <a href="#" id="add_user">
-                <span class="glyphicon glyphicon-user">  AddUser</span>
-            </a>
-            <br />
-            <input type="text", id="user_email" name="user_email" class="hidden form-control" placeholder="User Email"/>
-        </div>
+<div class="row">
+    <div class="col-xs-10">
+        <h4><b>{{ .project.Name }}</b></h4>
     </div>
-
-    <hr />
-    <br />
-
-    {{ if eq .projectUsersCount 1 }}
-        {{ template "Project/List.html" . }}
-    {{ else }}
-        {{ template "Project/Pipeline.html" . }}
-    {{ end }}
+    <div class="col-xs-2">
+        <a href="#" id="add_user">
+            <span class="glyphicon glyphicon-user">  AddUser</span>
+        </a>
+        <input type="text", id="user_email" name="user_email" class="hidden form-control" placeholder="User Email"/>
+        <br />
+    </div>
 </div>
+
+<hr />
+<br />
+
+{{ if eq .projectUsersCount 1 }}
+    {{ template "Project/List.html" . }}
+{{ else }}
+    {{ template "Project/Pipeline.html" . }}
+{{ end }}
