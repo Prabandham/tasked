@@ -12,10 +12,16 @@ POST    /register                               App.Register
 GET     /logout                                 App.Logout
 
 GET     /dashboard                              Dashboard.Index
+
 POST    /create_project                         Project.CreateProject
 GET     /project/:id                            Project.Show
 POST    /create_task                            Project.CreateTask
-POSt    /complete_task                          Project.CompleteTask
+POST    /complete_task                          Project.CompleteTask
+POST    /add_user                               Project.AddUser
+POST    /update_task                            Project.UpdateTask
+POST    /update_phase                           Project.UpdatePhase
+POST    /add_phase                              Project.AddPhase
+
 
 # Ignore favicon requests
 GET     /favicon.ico                            404

@@ -1,1 +1,38 @@
-<h1> This is going to be like trello :- TODO </h1>
+<!-- NOTE this assignment is neeed other wise it will complain of nested models -->
+{{ $phases := .phases }}
+{{ $tasks := .tasks }}
+
+<div class="list-tasks">
+    {{ range $phase := $phases }}
+        <div class="col-xs-3 y-scroll">
+            <div class="panel panel-primary">
+                <div class="panel-heading" contenteditable="true" id="phaseName_{{ $phase.ID }}"> {{ index $phase.Name }}</div>
+                <div class="panel-body">
+                    {{ range $task := $tasks }}
+                        {{ if eq $task.PhaseID $phase.ID  }}
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class='card-heading' contenteditable="true" id="taskName_{{ $task.ID }}">{{ $task.Name }}</h5>
+                                </div>
+                                <div class="card-container">
+                                    Content for each task. Like created due on
+                                    User Name to whom it was assigned and so on.
+                                </div>
+                            </div>
+                            <br />
+                        {{ end }}
+                    {{ end }}
+                </div>
+            </div>
+        </div>
+    {{ end }}
+
+    <!-- This is going to be a static place where they can add more phases to the respective project -->
+    <div class="col-xs-3">
+        <div class="panel panel-primary">
+            <div class="panel-heading" contenteditable="true" id="NewPhaseName">Add A New Phase ..</div>
+            <div class="panel-body">
+            </div>
+        </div>
+    </div>
+</div>

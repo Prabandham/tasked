@@ -90,3 +90,71 @@ func (c Project) CompleteTask() revel.Result {
 	response := map[string]string{"status": "success", "cssClass": "list-group-item-success"}
 	return c.RenderJson(response)
 }
+
+// AddUser add's a user to the specified Project
+func (c Project) AddUser() revel.Result {
+	var user models.User
+	var userProject models.UserProject
+
+	app.DB.Where("email = ?", c.Request.Form.Get("email")).First(&user)
+	if user.ID == 0 {
+		response := map[string]string{"status": "failure", "message": "No User found by that Email ID"}
+		return c.RenderJson(response)
+	}
+	projectID, _ := strconv.Atoi(c.Request.Form.Get("project_id"))
+	app.DB.FirstOrCreate(&userProject, map[string]interface{}{"user_id": user.ID, "project_id": uint(projectID)})
+	if userProject.UserId == user.ID {
+		c.Flash.Success("You are now Collboarting with %s", user.Name)
+		c.Validation.Keep()
+		c.FlashParams()
+	}
+	response := map[string]string{"status": "success", "message": "User added to Project !!"}
+	return c.RenderJson(response)
+}
+
+// UpdatePhase will handle updating the phase name and Description
+func (c Project) UpdatePhase() revel.Result {
+	var phase models.Phase
+
+	app.DB.First(&phase, c.Request.Form.Get("phase_id"))
+	phase.Name = c.Request.Form.Get("phase_name")
+	phase.Description = c.Request.Form.Get("phase_description")
+	app.DB.Save(&phase)
+
+	return c.RenderJson(map[string]string{"status": "success", "message": "updated phase"})
+}
+
+// UpdateTask Will handle updating the Task
+func (c Project) UpdateTask() revel.Result {
+	var task models.Task
+	formData := c.Request.Form
+	app.DB.First(&task, formData.Get("task_id"))
+
+	if formData.Get("task_name") != "" {
+		task.Name = formData.Get("task_name")
+	}
+	if formData.Get("task_description") != "" {
+		task.Description = formData.Get("task_description")
+	}
+	if formData.Get("phase_id") != "" {
+		phaseID, _ := strconv.Atoi(formData.Get("phase_id"))
+		task.PhaseID = uint(phaseID)
+	}
+	if formData.Get("user_id") != "" {
+		userID, _ := strconv.Atoi(formData.Get("user_id"))
+		task.UserID = uint(userID)
+	}
+
+	app.DB.Save(&task)
+	return c.RenderJson(map[string]string{"status": "success", "message": "updated task"})
+}
+
+// AddPhase will add a phase to a given Project
+func (c Project) AddPhase() revel.Result {
+	var phase models.Phase
+	formData := c.Request.Form
+	projectID, _ := strconv.Atoi(formData.Get("project_id"))
+
+	app.DB.FirstOrCreate(&phase, map[string]interface{}{"project_id": uint(projectID), "name": formData.Get("phase_name")})
+	return c.RenderJson(map[string]string{"status": "success", "message": "created phase"})
+}
