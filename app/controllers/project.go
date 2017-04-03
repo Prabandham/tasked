@@ -17,6 +17,12 @@ type Project struct {
 // CreateProject handles creation of a project
 func (c Project) CreateProject() revel.Result {
 	project := models.Project{Name: c.Request.Form.Get("project.Name")}
+	project.Validate(c.Validation)
+	if c.Validation.HasErrors() {
+		c.Validation.Keep()
+		c.FlashParams()
+		return c.Redirect("/dashboard")
+	}
 	app.DB.Create(&project)
 
 	intUserID, _ := strconv.Atoi(c.Session["user_id"])
@@ -70,6 +76,12 @@ func (c Project) CreateTask() revel.Result {
 	task.Name = c.Request.Form.Get("task.Name")
 	task.PhaseID = uint(phaseID)
 	task.UserID = uint(userID)
+	task.Validate(c.Validation)
+	if c.Validation.HasErrors() {
+		c.Validation.Keep()
+		c.FlashParams()
+		return c.Redirect(c.Request.Referer())
+	}
 	app.DB.Create(&task)
 
 	c.Flash.Success("Created Successfully !!")

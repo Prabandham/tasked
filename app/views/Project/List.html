@@ -2,6 +2,9 @@
     <div class="col-xs-1"></div>
     <div class="col-xs-8 no-padding-right">
         <input type="text" class="form-control" id="name" name="task.Name" placeholder="Task">
+        {{ if .errors }}
+            <span class="text-danger">Task Name {{index .errors "task.Name"}}</span>
+        {{ end }}
         {{ range $phase := .phases }}
             <input type="hidden" class="form-control" id="phase_id" name="task.PhaseID" value="{{index $phase.ID }}">
         {{ end  }}

@@ -3,13 +3,14 @@
 
 
 <div class="container">
-    {{template "flash.html" .}}
-
     <div class="row">
         <form role="form" class="form-horizontal" method="POST" action="/create_project">
             <div class="col-xs-1"></div>
             <div class="col-xs-8 no-padding-right">
                 <input type="text" class="form-control" id="name" name="project.Name" placeholder="Project Name">
+                {{ if .errors }}
+                    <span class="text-danger">Project Name {{index .errors "project.Name"}}</span>
+                {{ end }}
             </div>
             <div class="col-xs-3 no-padding-left">
                 <button type="submit" class="btn btn-primary">Create</button>

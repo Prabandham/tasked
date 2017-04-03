@@ -2,7 +2,7 @@ package models
 
 import (
 	"github.com/jinzhu/gorm"
-	// "github.com/revel/revel"
+	"github.com/revel/revel"
 	"time"
 )
 
@@ -17,6 +17,11 @@ type Task struct {
 	UserID      uint
 	CompletedAt *time.Time
 	DueOn       *time.Time
+}
+
+func (task *Task) Validate(v *revel.Validation) {
+	v.Required(task.Name)
+	v.MinSize(task.Name, 3)
 }
 
 func (t Task) IsComplete() bool {
